@@ -10,8 +10,6 @@ class Solution {
             else if(nums[i] > m2)
                 m2 = nums[i];
         }
-        m1--;
-        m2--;
-        return (m1*m2);
+        return ((m1-1)*(m2-1));
     }
 }
