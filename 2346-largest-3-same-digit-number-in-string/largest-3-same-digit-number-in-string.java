@@ -11,8 +11,6 @@ class Solution {
             }
             else 
                 count++;
-            if(count >= 3 && s.charAt(i) == s.charAt(j))
-                count = 0;
             if(count == 2) {
                 max = Math.max(max, s.charAt(i)-'0');
             }
