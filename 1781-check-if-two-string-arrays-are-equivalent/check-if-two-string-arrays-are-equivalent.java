@@ -7,16 +7,10 @@ class Solution {
         String w2 = "";
 
         for(int i=0; i<n1; i++) {
-            String a1 = word1[i];
-            for(int j=0; j<a1.length(); j++) {
-                w1 += a1.charAt(j);
-            }
+            w1 += word1[i];
         }
         for(int i=0; i<n2; i++) {
-            String a1 = word2[i];
-            for(int j=0; j<a1.length(); j++) {
-                w2 += a1.charAt(j);
-            }
+                w2 += word2[i];
         }
         return w1.equals(w2);
     }
