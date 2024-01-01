@@ -5,8 +5,12 @@ class Solution {
         int count = 0;
         for(int i = 0; i<n; i++) {
             for(int j=0; j<m; j++) {
-                if(mat[i][j] == 1 && isSpecial(mat, n, m, i, j)) 
-                    count++;
+                if(mat[i][j] == 1 ) {
+                    if(isSpecial(mat, n, m, i, j)) 
+                        count++;
+                    else 
+                        break;
+                }
             }
         }
         return count;
