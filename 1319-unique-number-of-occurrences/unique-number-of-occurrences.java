@@ -1,24 +1,18 @@
 class Solution {
     public boolean uniqueOccurrences(int[] nums) {
-        
-        Map <Integer, Integer> map = new HashMap<>();
+        int freq[] = new int[2001];
+        boolean flag[] = new boolean[2001];
         int n = nums.length;
-        if( n > 6 && nums[1] == 21 && nums[5] == -126) return false;
-        for(int num : nums) {
-            if(map.containsKey(num))
-                map.put(num, map.get(num)+1);
-            else
-                map.put(num, 1);
+        for(int val : nums) 
+            freq[val+1000]++;
+            
+        for(int val : freq) {
+            // val += 1000;
+            if(val == 0) continue;
+            if(flag[val]) return false;
+            flag[val] = true;
         }
-        List<Integer> list = new ArrayList<>();
-        for(Map.Entry<Integer,Integer> ele : map.entrySet()) {
-            list.add(ele.getValue());
-        }
-        for(int i=0; i<list.size(); i++){
-            int ans = list.get(i);
-            list.remove(i);
-            if(list.contains(ans)) return false;
-        }
+        
         return true;
     }
 }
