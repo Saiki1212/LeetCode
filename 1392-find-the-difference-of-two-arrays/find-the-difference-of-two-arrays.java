@@ -1,30 +1,31 @@
 class Solution {
     public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
-        int n1 = nums1.length, n2 = nums2.length;
-        List<Integer> l1 = new ArrayList<>();
-        List<List<Integer>> list = new ArrayList<>();
-        List<Integer> l2 = new ArrayList<>();
-        for(int i=0; i<n1; i++)
-            if(!l1.contains(nums1[i]))
-                l1.add(nums1[i]);
-        for(int i=0; i<n2; i++)
-            if(!l2.contains(nums2[i]))
-                l2.add(nums2[i]);
-        list.add(new ArrayList<>());
-        for(int i=0; i<l1.size(); i++) {
-            int num = l1.get(i);
-            if(!l2.contains(num) && !list.contains(num)) {
-                list.get(0).add(num);
+        boolean[] n1 = new boolean[2001];
+        boolean[] n2 = new boolean[2001];
+
+        ArrayList<Integer> dif1 = new ArrayList<>();
+        ArrayList<Integer> dif2 = new ArrayList<>();
+
+        for (int num : nums1) {
+            n1[num + 1000] = true;
+        }
+
+        for (int num : nums2) {
+            n2[num + 1000] = true;
+
+            if (!n1[num + 1000]) {
+                n1[num + 1000] = true;
+                dif2.add(num);
             }
         }
 
-        list.add(new ArrayList<>());
-        for(int i=0; i<l2.size(); i++) {
-            int num = l2.get(i);
-            if(!l1.contains(num) && !list.contains(num)) {
-                list.get(1).add(num);
+        for (int num : nums1) {
+            if (!n2[num + 1000]) {
+                n2[num + 1000] = true;
+                dif1.add(num);
             }
         }
-        return list;
+
+        return List.of(dif1, dif2);
     }
 }
