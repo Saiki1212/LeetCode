@@ -5,11 +5,13 @@ class Solution {
         for(int val : nums) 
             freq[val+1000]++;
             
-        for(int val : freq) {
-            // val += 1000;
-            if(val == 0) continue;
-            if(flag[val]) return false;
-            flag[val] = true;
+        for(int val : nums) {
+            val += 1000;
+            int ans = freq[val];
+            freq[val] = 0;
+            if(ans == 0) continue;
+            if(flag[ans]) return false;
+            flag[ans] = true;
         }
 
         return true;
