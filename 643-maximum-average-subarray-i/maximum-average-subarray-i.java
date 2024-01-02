@@ -5,14 +5,12 @@ class Solution {
         for(int i=0; i<k; i++) {
             sol += nums[i];
         }
-        double ans = sol/(k);
+        double ans = sol;
         sol = ans;
         for(int i=k; i<n; i++) {
-            ans = ans * k;
             ans = ans - nums[i-k] + nums[i];
-            ans = ans/(k);
             sol = Math.max(sol, ans);
         }
-        return sol;
+        return sol/k;
     }
 }
