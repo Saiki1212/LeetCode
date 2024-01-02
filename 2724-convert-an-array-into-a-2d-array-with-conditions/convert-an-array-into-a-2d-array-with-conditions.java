@@ -1,22 +1,18 @@
 class Solution {
     public List<List<Integer>> findMatrix(int[] nums) {
-        List<List<Integer>> list = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
-        int n = nums.length;
-        for(int num : nums) {
-            temp.add(num);
-        }
-        while(!temp.isEmpty()) {
-            List<Integer> arr = new ArrayList<>();
-            for(int i=0; i<temp.size(); i++) {
-                if(!arr.contains(temp.get(i))) {
-                    arr.add(temp.get(i));
-                    temp.remove(i);
-                    i--;
-                }
+        int freq[] = new int[nums.length + 1];
+
+        ArrayList<List<Integer>> ans = new ArrayList<>();
+        for (int c : nums) {
+            if (freq[c] >= ans.size()) {
+                ans.add(new ArrayList<>());
             }
-            list.add(new ArrayList(arr));
+
+            // Store the integer in the list corresponding to its current frequency.
+            ans.get(freq[c]).add(c);
+            freq[c]++;
         }
-        return list;
+
+        return ans;
     }
 }
