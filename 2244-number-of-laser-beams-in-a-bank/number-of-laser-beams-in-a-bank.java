@@ -5,7 +5,7 @@ class Solution {
         int beams = 0;
         int prev = 0;
         for(String s : bank) {
-            if(s.indexOf('1') == -1) continue;
+            // if(s.indexOf('1') == -1) continue;
             int curr = 0;
             for(int i=0; i<m; i++) {
                 curr += s.charAt(i)-'0';
