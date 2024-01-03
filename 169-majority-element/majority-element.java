@@ -1,18 +1,18 @@
 class Solution {
-    public int majorityElement(int[] nums) {
-        Map <Integer, Integer> map = new HashMap<>();
-        for(int n : nums) {
-            if(map.containsKey(n)) {
-                map.put(n, map.get(n)+1);
-            }
+    public int findMaj(int[] nums,int sI,int maj){
+        int c=0;
+        for(int i=sI;i<nums.length;i++){
+            if(nums[i]==maj)
+                c++;
             else
-                map.put(n, 1);
+                c--;
+            if(c==-1)
+                return findMaj(nums,i,nums[i]);
         }
-        Iterator itr = map.entrySet().iterator();
-        int avg = nums.length/2;
-        for(Map.Entry<Integer, Integer> ent : map.entrySet()) {
-            if(ent.getValue() > avg) return ent.getKey();
-        }
-        return -1;
+        return maj;
+    }
+    public int majorityElement(int[] nums) {
+       
+        return findMaj(nums,0,nums[0]);
     }
 }
