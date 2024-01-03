@@ -4,7 +4,8 @@ class Solution {
         int candidate1 = 0, candidate2 = 0; // Potential majority element candidates
 
         // First pass to find potential majority elements.
-        for (int i = 0; i < nums.length; i++) {
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
             // If count1 is 0 and the current number is not equal to candidate2, update candidate1.
             if (count1 == 0 && nums[i] != candidate2) {
                 count1 = 1;
@@ -29,12 +30,12 @@ class Solution {
         }
 
         List<Integer> result = new ArrayList<>();
-        int threshold = nums.length / 3; // Threshold for majority element
+        int threshold = n / 3; // Threshold for majority element
 
         // Second pass to count occurrences of the potential majority elements.
         count1 = 0;
         count2 = 0;
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < n; i++) {
             if (candidate1 == nums[i]) {
                 count1++;
             } else if (candidate2 == nums[i]) {
