@@ -8,12 +8,11 @@ class Solution {
             if(s.indexOf('1') == -1) continue;
             int curr = 0;
             for(int i=0; i<m; i++) {
-                if(s.charAt(i) == '1')
-                    curr++;
+                curr += s.charAt(i)-'0';
             }
+            if(curr == 0) continue;
             beams += prev*curr;
-            if(curr != 0)
-                prev = curr;
+            prev = curr;
         }
         return beams;
     }
