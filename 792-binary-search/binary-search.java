@@ -10,6 +10,7 @@ class Solution {
             else 
                 e--;
         }
+        System.gc();
         return -1;
     }
 }
