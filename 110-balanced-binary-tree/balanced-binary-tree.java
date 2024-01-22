@@ -21,7 +21,9 @@ class Solution {
 
     public boolean isBalanced(TreeNode root) {
         if(root == null) return true;
-        if(Math.abs(findHeight(root.left)-findHeight(root.right)) > 1) return false;
+        int left = findHeight(root.left);
+        int right = findHeight(root.right);
+        if(Math.abs(left-right) > 1) return false;
         return isBalanced(root.left) && isBalanced(root.right);
     }
 }
