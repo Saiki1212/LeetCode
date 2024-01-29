@@ -1,23 +1,31 @@
 class MyQueue {
-    Queue<Integer> que;
+    Stack <Integer> s1;
+    Stack <Integer> s2;
     public MyQueue() {
-        que = new LinkedList<>();
+        s1 = new Stack<>();
+        s2 = new Stack<>();
     }
     
     public void push(int x) {
-        que.add(x);
+        while(!s1.isEmpty()) {
+            s2.push(s1.pop());
+        }
+        s1.push(x);
+        while(!s2.isEmpty()) {
+            s1.push(s2.pop());
+        }
     }
     
     public int pop() {
-        return que.remove();
+        return s1.pop();
     }
     
     public int peek() {
-        return que.peek();
+        return s1.peek();
     }
     
     public boolean empty() {
-        return que.isEmpty();
+        return s1.isEmpty();
     }
 }
 
