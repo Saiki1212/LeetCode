@@ -12,6 +12,7 @@ class Solution {
         }
         int idx = 0;
         for(int i=k; i<n; i++) {
+
             res[idx++] = nums[qq.peek()];
             while( !qq.isEmpty() && qq.peek() <= i-k)
                 qq.removeFirst();
@@ -19,6 +20,7 @@ class Solution {
                 qq.removeLast();
             qq.addLast(i);
         }
+        
         res[idx] = nums[qq.peek()];
         return res;
     }
