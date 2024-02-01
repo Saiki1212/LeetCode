@@ -14,13 +14,14 @@ class Solution {
         for(int i=k; i<n; i++) {
 
             res[idx++] = nums[qq.peek()];
-            while( !qq.isEmpty() && qq.peek() <= i-k)
-                qq.removeFirst();
+            if( !qq.isEmpty() && qq.peek() <= i-k)
+                qq.poll();
             while( !qq.isEmpty() && nums[i] >= nums[qq.peekLast()])
-                qq.removeLast();
-            qq.addLast(i);
+                qq.pollLast();
+            qq.offer(i);
+            
         }
-        
+
         res[idx] = nums[qq.peek()];
         return res;
     }
