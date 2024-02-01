@@ -4,7 +4,7 @@ public class Solution {
         int n = nums.length;
         int[][] result = new int[n/3][3];
         int idx = 0;
-        for (int i = 0; i + 2 < n; ++i) {
+        for (int i = 0; i + 3 <= n; ++i) {
             if (i % 3 == 0) {
                 if(nums[i+2]-nums[i] <= k) {
                     result[idx][0] = nums[i];
