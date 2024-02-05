@@ -1,8 +1,7 @@
 class Solution {
     public int firstUniqChar(String s) {
         int ans = Integer.MAX_VALUE;
-        char st[] = s.toCharArray();
-        for(char c : st) {
+        for(char c = 'a' ; c <= 'z' ; c++) {
             int idx = s.indexOf(c);
             if(idx != -1 && idx == s.lastIndexOf(c))
                 ans = Math.min(idx, ans);
