@@ -1,18 +1,22 @@
 class Solution {
-    public int findMaj(int[] nums,int sI,int maj){
-        int c=0;
-        for(int i=sI;i<nums.length;i++){
-            if(nums[i]==maj)
-                c++;
-            else
-                c--;
-            if(c==-1)
-                return findMaj(nums,i,nums[i]);
-        }
-        return maj;
-    }
+    
     public int majorityElement(int[] nums) {
-       
-        return findMaj(nums,0,nums[0]);
+       int n = nums.length;
+       Set<Integer> set = new HashSet<>();
+       int maxi = 0, val = 0;
+       for(int i=0; i<n; i++) {
+           int c = 1;
+           if(!set.contains(nums[i])) {
+               for(int j = i+1; j<n; j++) {
+                   if(nums[j] == nums[i]) c++;
+               }
+               set.add(nums[i]);
+               if(maxi < c) {
+                   val = nums[i];
+                   maxi = c;
+                }
+           }
+       }
+       return val;
     }
 }
