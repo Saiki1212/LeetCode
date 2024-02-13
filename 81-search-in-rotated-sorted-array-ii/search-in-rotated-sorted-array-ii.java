@@ -4,7 +4,6 @@ class Solution {
 
         while(s<=e) {
             int m = (s+e)/2;
-            System.out.println(m + " -- " + s + " -- " + e);
             if(nums[m] == tar) return true;
             if(nums[s] == nums[m] && nums[m] == nums[e]) {
                 s++; e--;
