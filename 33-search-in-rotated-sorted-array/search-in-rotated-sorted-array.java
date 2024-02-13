@@ -1,25 +1,18 @@
 class Solution {
-    public int search(int[] nums, int t) {
+    public int search(int[] nums, int tar) {
         int s = 0, e = nums.length-1;
-        while( s <= e) {
-            int mid = (s+e)/2;
-            if(nums[mid] == t)
-                return mid;
-            else if (nums[mid] >= nums[s]) {
-                if(nums[mid] > t && t >= nums[s])
-                    e = mid-1;
-                else
-                    s = mid+1;
+        while(s <= e) {
+            int m = (s+e)/2;
+            if(nums[m] == tar) return m;
+            if(nums[m] >= nums[s]) {
+                if(nums[m] > tar && nums[s] <= tar) e = m-1;
+                else s = m+1;
             }
             else {
-                if(t <= nums[e] && t > nums[mid])
-                    s = mid+1;
-                else 
-                    e = mid-1;
-
+                if(nums[m] < tar && nums[e] >= tar) s = m+1;
+                else e = m-1;
             }
         }
-
         return -1;
     }
 }
