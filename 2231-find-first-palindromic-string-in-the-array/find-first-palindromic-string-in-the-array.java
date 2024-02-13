@@ -1,11 +1,9 @@
 class Solution {
-    public static boolean isPal(String st) {
-        int s = 0, e = st.length()-1;
-        while(s < e) {
-            if(st.charAt(s) != st.charAt(e)) return false;
-            s++; e--;
-        }
-        return true;
+    public static boolean isPal(String s) {
+        StringBuilder str = new StringBuilder(s);
+        str = str.reverse();
+        String st = str.toString();
+        return s.equals(st);
     }
 
     public String firstPalindrome(String[] words) {
