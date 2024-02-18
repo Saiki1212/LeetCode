@@ -14,7 +14,6 @@ class Solution {
                 count = 0;
                 val++;
                 while(set.contains(val)) {
-                    // System.out.println("Val - " + val + " - - - " + i);
                     count++;
                     val++;
                 }
