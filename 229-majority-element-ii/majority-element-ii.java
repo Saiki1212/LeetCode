@@ -5,10 +5,9 @@ class Solution {
         List<Integer> list = new ArrayList<>();
         Map<Integer, Integer> map = new HashMap<>();
         for(int i : nums)  map.put(i, map.getOrDefault(i, 0) + 1);
-        for(int i : nums) {
-            int val = map.get(i);
-            if(val > great && !list.contains(i)) list.add(i); 
-        }
+        map.forEach((key, value) -> {
+            if(value > great) list.add(key);
+        });
         return list;
     }
 }
