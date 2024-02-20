@@ -2,7 +2,6 @@ class Solution {
     public List<List<Integer>> fourSum(int[] nums, int target) {
         int n = nums.length;
         List<List<Integer>> list = new ArrayList<>();
-        if(n == 4 && nums[0] == 1000000000 && nums[1] == 1000000000) return list;
         Arrays.sort(nums);
         int i = 0;
         
@@ -12,7 +11,10 @@ class Solution {
                 if(j != i+1 && nums[j] == nums[j-1]) continue;
                 int k = j+1, l = n-1;
                 while(k < l) {
-                    long sum = nums[i] + nums[j] + nums[k] + nums[l];
+                    long sum = nums[i];
+                    sum += nums[j];
+                    sum += nums[k];
+                    sum += nums[l];
                     if(sum > target) l--;
                     else if(sum < target) k++;
                     else {
