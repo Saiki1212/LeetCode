@@ -2,21 +2,26 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         int n = nums.length;
-        
-        Set<List<Integer>> different = new HashSet<>();
-        for(int i=0; i<n; i++) {
-            Set<Integer> set = new HashSet<>();
-            for(int j = i+1; j<n; j++) {
-                int dif = -1 * (nums[i]+nums[j]);
-                if(set.contains(dif)) {
-                    List<Integer> temp = Arrays.asList(nums[i], nums[j], dif);
-                    temp.sort(null);
-                    different.add(temp);
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        int previ = 100001;
+        for (int i = 0; i < n; i++) {
+            if( i > 0 && nums[i] == nums[i-1]) continue;
+            int j = i+1, k = n-1;
+            while(j < k) {
+                int val = nums[i] + nums[j] + nums[k];
+                if(val < 0) j++;
+                else if(val > 0) k--;
+                else {
+                    List<Integer> temp = Arrays.asList(nums[i], nums[j], nums[k]);
+                    list.add(new ArrayList<>(temp));
+                    j++; k--;
+                    while(j < k && nums[k+1] == nums[k]) k--;
+                    while(j < k && nums[j] == nums[j-1]) j++;
                 }
-                set.add(nums[j]);
             }
         }
-        List<List<Integer>> list = new ArrayList<>(different);
+        
         return list;
     }
 }
