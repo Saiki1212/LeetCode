@@ -1,16 +1,18 @@
 class Solution {
     public int findJudge(int n, int[][] trust) {
+        int r = trust.length;
+        if(r == 0 && n==1) return 1;
         int first[] = new int[n+1];
-        int second[] = new int[n+1];
+        int ans = 0;
+        for(int []a : trust) {
+            first[a[1]]++;
+            if(first[a[1]] == n-1) ans = a[1];
+        }
+        if(ans  == 0) return -1;
 
         for(int []a : trust) {
-            first[a[0]]++;
-            second[a[1]]++;
+            if(a[0] == ans) return -1;
         }
-
-        for(int i=1; i<=n; i++) {
-            if(first[i] == 0 && second[i] == n-1) return i;
-        }
-        return -1;
+        return ans;
     }
 }
