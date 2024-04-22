@@ -1,17 +1,21 @@
 class Solution {
     public List<List<Integer>> generate(int n) {
-        List<List<Integer>> list = new ArrayList<>();
-        for(int i = 1; i<=n; i++) {
-            list.add(new ArrayList<>());
-            for(int j = 1; j <= i; j++) {
-                if(j == 1) list.get(i-1).add(1);
-                else if(j == i) list.get(i-1).add(1);
+        List<List<Integer>> res = new ArrayList<>();
+
+        for(int i=0; i<n; i++) {
+            int j=0;
+            List<Integer> list = new ArrayList<>();
+            while(j <= i) {
+                if(j == 0) list.add(1);
+                else if(j == i) list.add(1);
                 else {
-                    int val = list.get(i-2).get(j-2) + list.get(i-2).get(j-1);
-                    list.get(i-1).add(val);
+                    int val = res.get(i-1).get(j-1) + res.get(i-1).get(j);
+                    list.add(val);
                 }
+                j++;
             }
+            res.add(new ArrayList<>(list));
         }
-        return list;
+        return res;
     }
 }
