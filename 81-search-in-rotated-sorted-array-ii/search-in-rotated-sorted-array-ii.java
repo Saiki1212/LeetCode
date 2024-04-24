@@ -5,9 +5,8 @@ class Solution {
         while(s <= e) {
             int m = (s+e)/2;
             if(nums[m] == tar) return true;
-            if(nums[s] == nums[e] && nums[m] == nums[s]) {
+            if(nums[s] == nums[e] ) {
                 s++;
-                e--;
             }
             else if(nums[m] >= nums[s]) {
                 if(nums[m] > tar && nums[s] <= tar) e=m-1;
