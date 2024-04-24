@@ -1,22 +1,22 @@
 class Solution {
 
-    public static int findH(int [] nums, int m ,int n) {
-        int count = 0;
-        for (int i = 0; i < n; i++) {
-            count += Math.ceil((double)(nums[i]) / (double)(m));
+    public static int totalH(int []nums, int m) {
+        int c = 0;
+        for(int i : nums) {
+            c += Math.ceil((double)(i) / (double)(m));
         }
-        return count;
+        return c;
     }
 
-    public int minEatingSpeed(int[] nums, int h) {
-        int n = nums.length, e = 0;
-        for(int i = 0; i<n; i++) e = Math.max(e, nums[i]);
-        int s = 1;
-        while(s <= e) {
+    public int minEatingSpeed(int[] piles, int h) {
+        int s = 1, e=0;
+        for(int i: piles) e = Math.max(i, e);
+
+        while( s<=e ) {
             int m = (s+e)/2;
-            int hours = findH(nums, m, n);
-            if(hours > h) s = m+1;
-            else e = m-1;
+            int th = totalH(piles, m);
+            if(th <= h) e = m-1;
+            else s = m+1;
         }
         return s;
     }
