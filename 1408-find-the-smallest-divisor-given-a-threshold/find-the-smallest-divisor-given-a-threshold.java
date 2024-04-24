@@ -10,10 +10,7 @@ class Solution {
 
     public int smallestDivisor(int[] nums, int thre) {
         int n = nums.length;
-        int s = 1, e = Integer.MIN_VALUE;
-        for(int i : nums) {
-            e = Math.max(e, i);
-        }
+        int s = 1, e = 1000000;
 
         while(s <= e) {
             int mid = (s+e)/2;
