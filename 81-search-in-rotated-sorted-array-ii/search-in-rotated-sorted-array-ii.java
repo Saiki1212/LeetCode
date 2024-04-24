@@ -1,21 +1,21 @@
 class Solution {
     public boolean search(int[] nums, int tar) {
-        int e = nums.length-1, s = 0;
+        int s=0, e=nums.length-1;
 
-        while(s<=e) {
+        while(s <= e) {
             int m = (s+e)/2;
             if(nums[m] == tar) return true;
-            if(nums[s] == nums[m] && nums[m] == nums[e]) {
-                s++; e--;
-                continue;
+            if(nums[s] == nums[e] && nums[m] == nums[s]) {
+                s++;
+                e--;
             }
-            if(nums[m] >= nums[s]) {
-                if(nums[m] > tar && nums[s] <= tar) e = m-1;
-                else s = m+1;
+            else if(nums[m] >= nums[s]) {
+                if(nums[m] > tar && nums[s] <= tar) e=m-1;
+                else s=m+1;
             }
             else {
-                if(nums[m] < tar && nums[e] >= tar) s = m+1;
-                else e = m-1;
+                if(nums[m] < tar && nums[e] >= tar) s=m+1;
+                else e=m-1;
             }
         }
         return false;
