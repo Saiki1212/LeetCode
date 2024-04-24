@@ -20,7 +20,7 @@ class Solution {
             if(nums[m] <= tar) s = m+1;
             else e = m-1;
         }
-        if(nums[e] == tar) res[1] = e;
+        res[1] = e;
         return res;
     }
 }
