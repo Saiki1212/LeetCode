@@ -1,21 +1,25 @@
 class Solution {
-    public static boolean fun(int [][] mat, int row, int e, int tar) {
-        int s = 0;
-        e--;
-        while(s <= e) {
-            int m = (s+e)/2;
-            if(mat[row][m] == tar) return true;
-            if(mat[row][m] > tar) e = m-1;
-            else s = m+1;
-        }
-        return false;
-    }
-
     public boolean searchMatrix(int[][] mat, int tar) {
         int row = mat.length, col = mat[0].length;
-        for(int i=0; i<row; i++) {
-            for(int j = 0; j<col; j++)
-                if(mat[i][j] == tar) return true;
+        int s = 0, e = row-1, idx = 0;
+
+        while( s<=e ) {
+            int m = (s+e)/2;
+            idx = m;
+            if(mat[m][0] == tar) return true;
+            else if(mat[m][0] > tar) e = m-1;
+            else if(mat[m][0] < tar && mat[m][col-1] >= tar) {
+                break;
+            }
+            else s = m+1;
+        }
+
+        s = 0; e = col-1;
+        while( s<=e ) {
+            int m = (s+e)/2;
+            if(mat[idx][m] == tar) return true;
+            else if(mat[idx][m] > tar) e = m-1;
+            else s = m+1;
         }
         return false;
     }
