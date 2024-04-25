@@ -1,30 +1,21 @@
 class Solution {
     public int[] findPeakGrid(int[][] mat) {
         int r = mat.length, c = mat[0].length;
-        int e = r*c;
-        int id1 = 0, id2 = 0;
-        for(int in = 0; in <= e; in++) {
-            int i = id1, j = id2;
+        int e = c-1, s = 0;
+        
+        while( s<= e){
+            int mid = (s+e)/2;
+            int id1 = 0, pre = mat[0][mid];
+            for(int i=1; i<r; i++) {
+                if(mat[i][mid] > pre) {
+                    pre = mat[i][mid];
+                    id1 = i;
+                }
+            }
             
-            if(i > 0 && mat[i][j] < mat[i-1][j]) {
-                id1 = i-1; id2 = j;
-            }
-            if(i<r-1 && mat[i][j] < mat[i+1][j]) {
-                if(mat[i+1][j] > mat[id1][id2]) {
-                    id1 = i+1; id2 = j;
-                }
-            }
-            if(j > 0 && mat[i][j] < mat[i][j-1]) {
-                if(mat[i][j-1] > mat[id1][id2]) {
-                    id1 = i; id2 = j-1;
-                }
-            }
-            if(j < c-1 && mat[i][j] < mat[i][j+1]) {
-                if(mat[i][j+1] > mat[id1][id2]) {
-                    id1 = i; id2 = j+1;
-                }
-            }
-            if(id1 == i && id2 == j) return new int[]{i, j};
+            if(mid > 0 && mat[id1][mid-1] > mat[id1][mid]) e = mid-1;
+            else if(mid < c-1 && mat[id1][mid+1] > mat[id1][mid]) s = mid+1;
+            else return new int[]{id1, mid};
         }
         return null;
     }
