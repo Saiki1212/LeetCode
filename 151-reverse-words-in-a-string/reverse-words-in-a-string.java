@@ -1,33 +1,21 @@
 class Solution {
-    public String reverseWords(String s) {
-        s = s.trim();
-        int n=0;
-        for(int i=0; i<s.length(); i++)
-            s = s.replace("  ", " ");
-        
-        for(int i=0; i<s.length(); i++) {
-            if(s.charAt(i) == ' ')
-                n++;
-        }
+    public String reverseWords(String str) {
+        String s = str.trim();
+        int n = s.length();
+        int i = n-1;
+        StringBuilder sb = new StringBuilder();
+        int j = n-1;
 
-        String []Arr = new String[n+1];
-        int k=0;
-        String str = "";
-        for(int i=0; i<s.length(); i++) {
+        while(i >= 0) {
             if(s.charAt(i) == ' ') {
-                Arr[k++] = str;
-                str = "";
-            }  
-            else 
-                str += s.charAt(i);
+                sb.append(s.substring(i+1,j+1));
+                sb.append(" ");
+                while(s.charAt(i) == ' ') i--;
+                j = i;
+            }
+            i--;
         }
-        Arr[k] = str;
-        str = "";
-        for(int i=Arr.length-1; i>=0; i--) {
-            str += Arr[i];
-            if(i!=0)
-                str += " ";
-        }
-        return str;
+        sb.append(s.substring(i+1, j+1));
+        return sb.toString();
     }
 }
