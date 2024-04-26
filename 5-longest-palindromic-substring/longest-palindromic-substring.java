@@ -12,16 +12,25 @@ class Solution {
 
     public String longestPalindrome(String s) {
         int n = s.length();
-        String []str = {""};
+        String longest = ""+s.charAt(0);
 
-        for(int i=0; i<n; i++) {
-            for(int j = n-1; j>=i; j--) {
-                if(isPal(s.substring(i, j+1)) && str[0].length() < (j-i+1)) {
-                    str[0] = s.substring(i, j+1);
-                    break;
-                }
+        for(int i=1; i<n; i++) {
+            // for Odd .....
+            int low = i, high = i;
+            while(s.charAt(low) == s.charAt(high)) {
+                low--; high++;
+                if(low == -1 || high == n) break;
             }
+            if((high-low-1) > longest.length()) longest = s.substring(low+1, high);
+
+            // for Even ....
+            low = i-1; high = i;
+            while(s.charAt(low) == s.charAt(high)) {
+                low--; high++;
+                if(low == -1 || high == n) break;
+            }
+            if((high-low-1) > longest.length()) longest = s.substring(low+1, high);
         }
-        return str[0];
+        return longest;
     }
 }
