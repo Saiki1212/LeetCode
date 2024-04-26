@@ -1,12 +1,4 @@
 class Solution {
-    class Pair {
-        int fre;
-        char c;
-        Pair(char c, int fre) {
-            this.fre = fre;
-            this.c = c;
-        }
-    }
     public String frequencySort(String s) {
         int n = s.length();
         char freq[] = new char[123];
@@ -14,26 +6,21 @@ class Solution {
         for(int i=0; i<n; i++) {
             freq[s.charAt(i)]++;
         }
-
-        LinkedList<Pair> list = new LinkedList<>(); 
-
-        for(int i=45; i<123; i++) {
-            if(freq[i] > 0) list.add(new Pair((char)i, freq[i]));
-        }
-
-        Collections.sort(list, new Comparator<Pair>() {
-            public int compare(Pair a , Pair b) {
-                return b.fre - a.fre;
-            }
-        });
-
         String res = "";
+        for(int i=0; i<n;) {
+            char cmax = '0';
+            for(int j=0; j<123; j++) {
+                if(freq[j] > freq[cmax]) {
+                    cmax = (char) j;
+                }
+            }
 
-        for(Pair p : list) {
-            int cnt = p.fre;
-            while(cnt-- > 0) res += p.c;
+            while(freq[cmax] > 0) {
+                i++;
+                res += cmax;
+                freq[cmax]--;
+            }
         }
-
         
         return res;
     }
