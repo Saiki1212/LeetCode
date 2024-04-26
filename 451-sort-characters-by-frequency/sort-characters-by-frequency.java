@@ -1,27 +1,27 @@
 class Solution {
     public String frequencySort(String s) {
-        int n = s.length();
-        char freq[] = new char[123];
+        char[] letters = s.toCharArray();
+        int N = letters.length;
+        int[] freq = new int[128];
 
-        for(int i=0; i<n; i++) {
-            freq[s.charAt(i)]++;
+        for (int i = 0; i < N; ++i) {
+            freq[letters[i]]++;
         }
-        String res = "";
-        for(int i=0; i<n;) {
-            char cmax = '0';
-            for(int j=0; j<123; j++) {
-                if(freq[j] > freq[cmax]) {
-                    cmax = (char) j;
-                }
+
+        for (int i = 0; i < N;) {
+            char cmax = ',';
+
+            for (int j = 0; j < 128; ++j) {
+                if (freq[j] > freq[cmax])
+                    cmax = (char)j;
             }
 
-            while(freq[cmax] > 0) {
-                i++;
-                res += cmax;
+            while (freq[cmax] != 0) {
+                letters[i++] = cmax;
                 freq[cmax]--;
             }
         }
-        
-        return res;
+
+        return new String(letters);
     }
 }
