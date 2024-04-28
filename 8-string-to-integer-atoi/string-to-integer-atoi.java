@@ -8,10 +8,12 @@ class Solution {
         int n = s.length();
         int sign = 0;
         String res = ""; long sum = 0; int i=0;
+
+        while( i<n && s.charAt(i) == ' ') i++;
+
         while(i < n) {
             char c = s.charAt(i);
-            if(res.length() == 0 && c == ' ') i++;
-            else if(res.length() == 0 && c == '-' && sign == 0) {
+            if(res.length() == 0 && c == '-' && sign == 0) {
                 sign = 1;
                 res += '-';
                 i++;
