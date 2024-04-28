@@ -1,29 +1,24 @@
 class Solution {
+
     static int mod = 1000000007;
 
-    public static long pow(long a, long b) {
-        if (b == 0) {
-            return 1;
-        } else {
-            long half = pow(a, b / 2) % mod;
-            long result = (half * half) % mod;
-
-            if (b % 2 == 1) {
-                result = (result * a) % mod;
-            }
-
-            return result;
-        }
+    public static long GetPow(long val, long n, long pow) {
+        if(n <= 0) return 1;
+        if(n == 1) return (pow*val) % mod;
+        if(n % 2 != 0) pow = (pow * val) % mod;
+        n = n/2;
+        val = (val*val) % mod;
+        return GetPow(val, n, pow);
     }
 
     public int countGoodNumbers(long n) {
-        long evenPlaces = (n+1)/2;
-        long primePlaces = (n)/2;
-        long x = pow(5, evenPlaces) % mod;
-        long y = pow(4, primePlaces) % mod;
-        // System.out.println("x "+x+" y "+y);
-        long ans = (x * y) % mod;
-        System.out.println(ans);
+        long toteven = (n+1)/2;
+        long totodd = n/2;
+
+        long even = GetPow(5, toteven, 1);
+        long odd = GetPow(4, totodd, 1);
+
+        long ans = (even * odd) % mod;
         return (int) ans;
     }
 }
