@@ -6,7 +6,7 @@ class Solution {
             return;
         }
 
-        String curr = nums[digits.charAt(i)-'0'];
+        String curr = nums[digits.charAt(i)-'0'-2];
 
         for(int j = 0; j<curr.length(); j++) {
             GetPatterns(list, nums, s+curr.charAt(j), digits, i+1);
@@ -19,7 +19,7 @@ class Solution {
             return list;
         }
 
-        String nums[] = {"", "","abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        String nums[] = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
 
         GetPatterns(list, nums, "", digits, 0);
     
