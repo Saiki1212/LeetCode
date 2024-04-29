@@ -3,8 +3,7 @@ class Solution {
     public static void GetAllSumK(List<List<Integer>> list, List<Integer> temp, int i, int sum, int k) {
         if(sum <= 0 && temp.size() != k) return;
         if(sum == 0 && temp.size() == k) {
-            if(!list.contains(temp))
-                list.add(new ArrayList<>(temp));
+            list.add(new ArrayList<>(temp));
             return;
         }
         for(int j = i; j<10; j++) {
