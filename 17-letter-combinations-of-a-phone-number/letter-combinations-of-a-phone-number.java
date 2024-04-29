@@ -1,15 +1,16 @@
 class Solution {
 
-    public static void GetPatterns(List<String> list, Map<Character, String> nums, String s, String digits, int i) {
+    public static void GetPatterns(List<String> list, String[] nums, StringBuilder s, String digits, int i) {
         if(i == digits.length()) {
-            list.add(s);
+            list.add(s.toString());
             return;
         }
 
-        String curr = nums.get(digits.charAt(i));
+        String curr = nums[digits.charAt(i)-'0'-2];
 
         for(int j = 0; j<curr.length(); j++) {
-            GetPatterns(list, nums, s+curr.charAt(j), digits, i+1);
+            GetPatterns(list, nums, s.append(curr.charAt(j)), digits, i+1);
+            s.deleteCharAt(s.length()-1);
         }
     }
 
@@ -19,17 +20,9 @@ class Solution {
             return list;
         }
 
-        Map<Character, String> nums = new HashMap<>();
-        nums.put('2', "abc");
-        nums.put('3', "def");
-        nums.put('4', "ghi");
-        nums.put('5', "jkl");
-        nums.put('6', "mno");
-        nums.put('7', "pqrs");
-        nums.put('8', "tuv");
-        nums.put('9', "wxyz");
+        String nums[] = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
 
-        GetPatterns(list, nums, "", digits, 0);
+        GetPatterns(list, nums, new StringBuilder(), digits, 0);
     
         return list;
 
