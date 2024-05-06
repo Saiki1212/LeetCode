@@ -9,41 +9,32 @@
  * }
  */
 class Solution {
-    public static ListNode reverse(ListNode curr) {
+
+    public ListNode removeNodes(ListNode head) {
+        if(head.next == null) return head;
+
+        ListNode curr = head;
         ListNode pre = null;
+        
         while(curr != null) {
             ListNode f = curr.next;
             curr.next = pre;
             pre = curr;
             curr = f;
         }
-        return pre;
-    }
-
-    public ListNode removeNodes(ListNode head) {
-        if(head.next == null) return head;
-        ListNode curr = reverse(head);
-
-        ListNode temp = curr.next;
-        ListNode pre = curr;
-
-        int value = curr.val;
         
+        curr = pre.next;
+        pre.next = null;
 
-        while(temp != null) {
-            if(temp.val < value) {
-                pre.next = temp.next;
+        while (curr != null) {
+            ListNode temp = curr.next;
+            if (curr.val >= pre.val) {
+                curr.next = pre;
+                pre = curr;
             }
-            else {
-                value = temp.val;
-                pre = pre.next;
-            }
-            temp = temp.next;
+            curr = temp;
         }
 
-        head = reverse(curr);
-
-        
-        return head;
+        return pre;
     }
 }
