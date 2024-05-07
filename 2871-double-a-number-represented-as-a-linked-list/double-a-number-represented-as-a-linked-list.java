@@ -9,35 +9,21 @@
  * }
  */
 class Solution {
-    public ListNode doubleIt(ListNode head) {
-        if(head == null) return head;
-        ListNode pre = null;
+    public ListNode doubleIt(ListNode head1) {
+        if(head1 == null) return head1;
+        ListNode head2 = new ListNode(0);
+        head2.next = head1;
 
-        while(head != null) {
-            ListNode f = head.next;
-            head.next = pre;
-            pre = head;
-            head = f;
-        }
-        head = pre.next;
-        pre.next = null;
-        int carry = (pre.val >= 5) ? 1 : 0;
+        ListNode pre = head2;
+        ListNode curr = head1;
 
-        pre.val = (pre.val >= 5) ? (pre.val * 2) % 10 : pre.val * 2;
-
-        while (head != null) {
-            ListNode nextNode = head.next;
-            int value = head.val * 2 + carry;
-            carry = value > 9 ? 1 : 0;
-            head.val = (value > 9) ? value % 10 : value;
-            head.next = pre;
-            pre = head;
-            head = nextNode;
+        while(curr != null) {
+            int val = curr.val * 2;
+            if(val >= 10) pre.val++;
+            curr.val = val % 10;
+            curr = curr.next;
+            pre = pre.next;
         }
-        if(carry == 1) {
-            ListNode newNode = new ListNode(1, pre);
-            return newNode;
-        }
-        return pre;
+        return head2.val == 1 ? head2 : head1;
     }
 }
