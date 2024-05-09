@@ -5,7 +5,8 @@ class Solution {
         long sum = 0;
         int i = n-1, minus = 0;
         while( k-- > 0 ) {
-            nums[i] = Math.max(nums[i]-minus++, 0);
+            if(nums[i] > minus) nums[i] = nums[i]-minus++;
+            else break;
             sum += nums[i--];
         }
         return sum;
