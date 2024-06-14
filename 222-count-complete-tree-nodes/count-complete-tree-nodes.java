@@ -14,20 +14,17 @@
  * }
  */
 class Solution {
-    public static int count = 0;
     public int countNodes(TreeNode root) {
         if(root == null) return 0;
-        cou(root);
-        System.gc();
-        int ans = count;
-        count = 0;
-        return ans;
+        int []a = new int[1];
+        cou(root,a);
+        return a[0];
     }
-    public static void cou(TreeNode root) {
+    public static void cou(TreeNode root, int[]a) {
         if(root != null) {
-            count++;
-            cou(root.left);
-            cou(root.right);
+            a[0]++;
+            cou(root.left,a);
+            cou(root.right,a);
         }
     }
 }
