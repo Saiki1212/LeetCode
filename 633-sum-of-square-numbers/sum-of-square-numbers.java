@@ -1,12 +1,11 @@
 class Solution {
     public boolean judgeSquareSum(int c) {
-        long s = 0, e = (long)Math.sqrt(c);
-
-        while(s<=e) {
-            long x = s*s, y = e*e;
-            if(x+y == c) return true;
-            if(x+y < c) s++;
-            else e--;
+        double a=Math.sqrt(c);
+        Set<Integer> set=new HashSet<>();
+        for(int i=0;i<=(int)a;i++){
+            if((i*i)+(i*i)==c) return true;
+            if(set.contains(i*i)) return true;
+            set.add(c-(i*i));
         }
         return false;
     }
