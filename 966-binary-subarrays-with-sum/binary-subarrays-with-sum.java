@@ -1,22 +1,19 @@
 class Solution {
-    public int f(int []nums, int k){
-        if(k<0)return 0;
-        int i=0,j=0,c=0,s=0;
-        while(j<nums.length){
-            s+=nums[j];
-            
-            while(s>k && i<j){
-                s-=nums[i];
-                i++;
-                
-            }
-            if(s<=k)c+=j-i+1;
-            j++;
-        }
-        return c;
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        return (Find(nums, goal) - Find(nums, goal-1));
     }
-    public int numSubarraysWithSum(int[] nums, int k) {
-        return f(nums, k)-f(nums, k-1);
-       
+
+    public static int Find(int[] nums, int goal) {
+        int n = nums.length;
+        int totalSubArrays = 0;
+
+        int sum = 0, j = 0;
+
+        for(int i=0; i<n; i++) {
+            sum += nums[i];
+            while(sum > goal && j < i) sum -= nums[j++];
+            if(sum <= goal) totalSubArrays += i-j+1;
+        }
+        return totalSubArrays;
     }
 }
