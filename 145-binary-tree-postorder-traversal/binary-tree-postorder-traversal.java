@@ -14,15 +14,17 @@
  * }
  */
 class Solution {
-    private ArrayList<Integer> list = new ArrayList<>();
-    private void findIn(TreeNode root) {
+
+    public static void find(List<Integer> list, TreeNode root) {
         if(root == null) return;
-        findIn(root.left);
-        findIn(root.right);
+        find(list, root.left);
+        find(list, root.right);
         list.add(root.val);
     }
+
     public List<Integer> postorderTraversal(TreeNode root) {
-        findIn(root);
+        List<Integer> list = new ArrayList<>();
+        find(list, root);
         return list;
     }
 }
