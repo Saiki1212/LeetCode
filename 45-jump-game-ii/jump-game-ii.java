@@ -9,8 +9,8 @@ class Solution {
             int idx = i+nums[i];
             if(idx >= n) idx = n-1;
             for(int j = idx; j>=(i+1); j--) {
-                if(dp[n-1] != n) return dp[n-1];
                 dp[j] = Math.min(dp[i]+1, dp[j]);
+                if(dp[n-1] != n) return dp[n-1];
             }
             // System.out.println(dp[i]);
         }
