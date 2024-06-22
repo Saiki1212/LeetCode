@@ -6,8 +6,10 @@ class Solution {
         dp[0] = 0;
 
         for(int i=0; i<n; i++) {
-            if(dp[n-1] != n) return dp[n-1];
-            for(int j = i+1; j<=(i+nums[i]) && j<n; j++) {
+            int idx = i+nums[i];
+            if(idx >= n) idx = n-1;
+            for(int j = idx; j>=(i+1); j--) {
+                if(dp[n-1] != n) return dp[n-1];
                 dp[j] = Math.min(dp[i]+1, dp[j]);
             }
             // System.out.println(dp[i]);
