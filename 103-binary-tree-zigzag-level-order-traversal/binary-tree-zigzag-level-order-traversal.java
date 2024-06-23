@@ -30,9 +30,10 @@ class Solution {
                 TreeNode curr = dq.pollFirst();
                 if(curr.left != null) dq.addLast(curr.left);
                 if(curr.right != null) dq.addLast(curr.right);
-                temp.add(curr.val);
+                
+                if(!revOrNot) temp.add(curr.val);
+                else temp.addFirst(curr.val);
             }
-            if(revOrNot) Collections.reverse(temp);
             list.add(new ArrayList<>(temp));
             revOrNot = !revOrNot;
         }
