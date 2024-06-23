@@ -1,12 +1,29 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 class Solution {
-    public static boolean GetInfo(TreeNode r1, TreeNode r2) {
-        if(r1 == null && r2 == null) return true;
-        if(r1 == null || r2 == null) return false;
-        return (r1.val == r2.val) && (GetInfo(r1.left, r2.right)) && (GetInfo(r1.right, r2.left));
+
+    public static boolean find(TreeNode p, TreeNode q) {
+        if(p == null && q == null) return true;
+        if(p == null || q == null) return false;
+        if(p.val != q.val) return false;
+
+        return find(p.left, q.right) && find(p.right, q.left);
     }
 
     public boolean isSymmetric(TreeNode root) {
-        if(root == null) return true;
-        return GetInfo(root.left, root.right);
+        return find(root.left, root.right);
     }
 }
