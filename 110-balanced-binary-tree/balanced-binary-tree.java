@@ -28,9 +28,8 @@ class Solution {
         if(Math.abs(left-right) > 1) return false;
         else {
             boolean le = isBalanced(root.left);
-            if(!le) return false;
             boolean ri = isBalanced(root.right);
-            if(! ri) return false;
+            if(!le || ! ri) return false;
         }
         return true;
     }
