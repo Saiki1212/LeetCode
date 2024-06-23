@@ -14,17 +14,33 @@
  * }
  */
 class Solution {
+
+    public static int findLeft(TreeNode root) {
+        if(root == null) return 0;
+        int c = 0;
+        while(root != null) {
+            c++;
+            root = root.left;
+        }
+        return c;
+    }
+
+    public static int findRight(TreeNode root) {
+        if(root == null) return 0;
+        int c = 0;
+        while(root != null) {
+            c++;
+            root = root.right;
+        }
+        return c;
+    }
     public int countNodes(TreeNode root) {
         if(root == null) return 0;
-        int []a = new int[1];
-        cou(root,a);
-        return a[0];
-    }
-    public static void cou(TreeNode root, int[]a) {
-        if(root != null) {
-            a[0]++;
-            cou(root.left,a);
-            cou(root.right,a);
-        }
+
+        int l = findLeft(root.left);
+        int r = findRight(root.right);
+
+        if(l == r) return ((2<<l) - 1);
+        return (1 + countNodes(root.left) + countNodes(root.right));
     }
 }
