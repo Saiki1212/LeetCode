@@ -14,17 +14,19 @@
  * }
  */
 class Solution {
-    private int findHeight(TreeNode root, int []maxi) {
+    private int find(TreeNode root) {
         if(root == null) return 0;
-        int l = findHeight(root.left, maxi);
-        int r = findHeight(root.right, maxi);
-        maxi[0] = Math.max(maxi[0], (l+r));
-        return 1+Math.max(l, r);
+
+        int leftH = find(root.left);
+        int rightH = find(root.right);
+
+        sum = Math.max(sum, leftH + rightH);
+        return Math.max(leftH, rightH) +1;
     }
 
+    Integer sum = Integer.MIN_VALUE;
     public int diameterOfBinaryTree(TreeNode root) {
-        int maxi[] = new int[1];
-        findHeight(root, maxi);
-        return maxi[0];
+        find(root);
+        return sum;
     }
 }
