@@ -16,12 +16,9 @@
 class Solution {
 
     private TreeNode create(int[] pre, int ub) {
-        if(pre.length == idx) return null;
-        TreeNode root = null;
-        if(pre[idx] < ub) {
-            root = new TreeNode(pre[idx++]);
-        }
-        else return null;
+        if(pre.length == idx || pre[idx] >= ub) return null;
+
+        TreeNode root = new TreeNode(pre[idx++]);
         root.left = create(pre, root.val);
         root.right = create(pre, ub);
         return root;
