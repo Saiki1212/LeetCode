@@ -14,33 +14,20 @@
  * }
  */
 class Solution {
-    public TreeNode bstFromPreorder(int[] pre) {
-        int n = pre.length;
-        TreeNode root = new TreeNode(pre[0]);
 
-        for(int i=1; i<n; i++) {
-            TreeNode node = root;
-            int v = pre[i];
-
-            while(node != null) {
-                if(node.val > v) {
-                    if(node.left == null) {
-                        TreeNode newNode = new TreeNode(v);
-                        node.left = newNode;
-                        break;
-                    }
-                    node = node.left;
-                }
-                else {
-                    if(node.right == null) {
-                        TreeNode newNode = new TreeNode(v);
-                        node.right = newNode;
-                        break;
-                    }
-                    node = node.right;
-                }
-            }
+    private TreeNode create(int[] pre, int ub) {
+        if(pre.length == idx) return null;
+        TreeNode root = null;
+        if(pre[idx] < ub) {
+            root = new TreeNode(pre[idx++]);
         }
+        else return null;
+        root.left = create(pre, root.val);
+        root.right = create(pre, ub);
         return root;
+    }
+    public int idx = 0;
+    public TreeNode bstFromPreorder(int[] pre) {
+        return create(pre, 10001);
     }
 }
