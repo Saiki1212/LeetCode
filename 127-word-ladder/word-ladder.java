@@ -9,6 +9,8 @@ class Solution {
     }
 
     public int ladderLength(String start, String end, List<String> wordList) {
+        if(!wordList.contains(end)) return 0;
+
         int len = wordList.size();
         HashSet<String> set = new HashSet<>();
         for(String i : wordList) set.add(i);
