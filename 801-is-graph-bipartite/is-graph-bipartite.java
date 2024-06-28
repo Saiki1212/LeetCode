@@ -15,10 +15,7 @@ class Solution {
         colors[idx] = color;
 
         for(int i : graph[idx]) {
-            if (colors[i] == 0 && !dfs(graph, i, 3 - color)) {
-                return false;
-            }
-            if (colors[i] == color) {
+            if (colors[i] == color || (colors[i] == 0 && !dfs(graph, i, 3 - color))) {
                 return false;
             }
         }
