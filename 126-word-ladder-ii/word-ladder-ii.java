@@ -58,6 +58,7 @@ class Solution {
             String word = dq.peek().child;
             int steps = dq.peek().dist;
             dq.remove();
+            if(word.equals(end)) break;
 
             for(int i=0; i<word.length(); i++) {
                 for(char ch = 'a'; ch <= 'z'; ch++) {
