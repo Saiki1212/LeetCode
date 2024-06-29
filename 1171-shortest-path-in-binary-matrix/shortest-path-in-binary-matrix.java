@@ -13,10 +13,9 @@ class Solution {
         int r = grid.length;
         if(grid[0][0] == 1 || grid[r-1][r-1] == 1) return -1;
 
-        boolean [][] visited = new boolean[r][r];
         PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.w - b.w);
         pq.add(new Pair(0, 0, 1));
-        visited[0][0] = true;
+        grid[0][0] = 1;
 
         while( !pq.isEmpty() ) {
             Pair p = pq.remove();
@@ -25,9 +24,9 @@ class Solution {
             int dcol[] = {-1, 0, 1, -1, 1, -1, 0, 1};
             for(int i = 0; i<8; i++) {
                 int xx = drow[i] + p.x, yy = dcol[i] + p.y;
-                if( xx < 0 || yy < 0 || xx >= r || yy >= r || grid[xx][yy] == 1 || visited[xx][yy] ) continue;
+                if( xx < 0 || yy < 0 || xx >= r || yy >= r || grid[xx][yy] == 1 ) continue;
                 pq.add(new Pair(xx, yy, p.w+1));
-                visited[xx][yy] = true;
+                grid[xx][yy] = 1;
             }
         }
         return -1;
