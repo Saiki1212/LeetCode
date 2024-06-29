@@ -20,9 +20,9 @@ class Solution {
         }
 
         // Sort the ancestor lists
-        for (List<Integer> list : res) {
-            Collections.sort(list);
-        }
+        // for (List<Integer> list : res) {
+        //     Collections.sort(list);
+        // }
 
         return res;
     }
