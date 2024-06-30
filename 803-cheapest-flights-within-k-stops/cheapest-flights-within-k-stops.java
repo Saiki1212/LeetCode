@@ -31,7 +31,7 @@ class Solution {
             int sz = dq.size(); 
             for(int a = 0; a<sz; a++) {
                 Pair p1 = dq.pollFirst();
-                if(stops < k) continue;
+                if(stops < k) break;
                 for(Pair p : adj.get(p1.to)) {
                     if(dist[p.to] > p1.cost + p.cost) {
                         dist[p.to] = p1.cost + p.cost;
