@@ -1,41 +1,59 @@
 class Solution {
 
-    public void dfs( boolean visited[], List<List<Integer>> adj, int i, int n) {
-        if(visited[i]) return;
-        visited[i] = true;
-        // arr[0]++;
-        for(int j : adj.get(i)) {
-            // arr[1]++;
-            dfs(visited, adj, j, n);
+    class DisJoint_DataStructure {
+        private List<Integer> parent;
+        private List<Integer> size;
+
+        DisJoint_DataStructure(int n) {
+            parent = new ArrayList<>(n);
+            size = new ArrayList<>(n);
+            for(int i = 0; i<n; i++) {
+                parent.add(i);
+                size.add(1);
+            }
         }
+
+        int findParent(int u) {
+            if(parent.get(u) != u) {
+                parent.set(u, findParent(parent.get(u)));
+            }
+            return parent.get(u);
+        }
+
+        int UnionbySize(int u, int v) {
+            int parent_u = findParent(u), parent_v = findParent(v);
+            if(parent_u == parent_v) return 1;
+
+            if(size.get(parent_u) < size.get(parent_v)) {
+                parent.set(parent_u, parent_v);
+                size.set(parent_v, (size.get(parent_u) + size.get(parent_v)));
+            }
+            else {
+                parent.set(parent_v, parent_u);
+                size.set(parent_u, (size.get(parent_u) + size.get(parent_v)));
+            }
+            return 0;
+        }
+
     }
 
     public int makeConnected(int n, int[][] connections) {
         if(n > connections.length + 1) return-1;
 
-        List<List<Integer>> adj = new ArrayList<>();
-        for(int i = 0; i<n; i++) adj.add(new ArrayList<>());
-        
-        boolean [] visited = new boolean[n];
+        DisJoint_DataStructure ds = new DisJoint_DataStructure(n);
 
-        for(int [] nums : connections) {
-            adj.get(nums[0]).add(nums[1]);
-            adj.get(nums[1]).add(nums[0]);
-        }
-        int components = 0;
-        for(int i = 0; i<n; i++) {
-            if(visited[i]) continue;
-            // int [] arr = new int[2]; // arr[0] == no.of nodes and arr[1] == ni.of edges...
-            dfs(visited, adj, i, n);
-            components++;
+        int extraEdges = 0, connectedComponents = 0;
+
+        for(int nums[] : connections) {
+            if(ds.findParent(nums[0]) != ds.findParent(nums[1])) {
+                extraEdges += ds.UnionbySize(nums[0], nums[1]);
+            }
         }
 
+        for (int i = 0; i < n; i++) {
+            if (ds.parent.get(i) == i) connectedComponents++;
+        }
 
-        // int connectionsRequired = 0;
-
-        // for(int i = 0; i<n; i++) {
-        //     if(!visited[i]) connectionsRequired++;
-        // }
-        return components-1;
+        return connectedComponents-1;
     }
 }
