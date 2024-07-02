@@ -15,10 +15,12 @@ class Solution {
                 if(map.get(i) == 0) map.remove(i);
             }
         }
+        map.clear();
         int[] result = new int[list.size()];
         for (int i = 0; i < list.size(); i++) {
             result[i] = list.get(i);
         }
+        list.clear();
 
         return result;
     }
