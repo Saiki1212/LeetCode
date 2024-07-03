@@ -1,13 +1,16 @@
 class Solution {
-    static int[] dp;
+
+    public int find(int [] feb, int n) {
+        if(n <= 1) return n;
+        if(feb[n] != -1) return feb[n];
+        return feb[n] = find(feb, n-1) + find(feb, n-2);
+    }
+
     public int climbStairs(int n) {
-        int last = 0;
-        int first = 1;
-        for(int i = n-1; i>=0; i--) {
-            int curr = last+first;
-            last = first;
-            first = curr;
-        }
-        return first;
+        int [] feb = new int[n+2];
+        Arrays.fill(feb, -1);
+        feb[0] = 0;
+        find(feb, n+1);
+        return feb[n+1];
     }
 }
