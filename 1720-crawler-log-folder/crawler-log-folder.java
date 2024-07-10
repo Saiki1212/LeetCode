@@ -1,17 +1,17 @@
 class Solution {
     public int minOperations(String[] logs) {
-        List<Integer> list = new ArrayList<>();
+        int res = 0;
         
         for(String s : logs) {
             if(s.equals("../")) {
-                if(list.isEmpty()) continue;
-                else list.remove(list.size() - 1);
+                if(res == 0) continue;
+                else res--;
                 continue;
             }
 
             if(s.equals("./")) continue;
-            else list.add(1);
+            else res++;
         }
-        return list.size();
+        return res;
     }
 }
