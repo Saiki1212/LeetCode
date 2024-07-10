@@ -4,13 +4,11 @@ class Solution {
         
         for(String s : logs) {
             if(s.equals("../")) {
-                if(res == 0) continue;
-                else res--;
+                if(res != 0) res--;
                 continue;
             }
 
-            if(s.equals("./")) continue;
-            else res++;
+            if(!s.equals("./")) res++;
         }
         return res;
     }
