@@ -15,20 +15,26 @@
  */
 class Solution {
 
-    public static void Inorder(TreeNode root, List<Integer> list) {
-        if(root != null) {
-            Inorder(root.left, list);
-            if(root.left == null && root.right == null) list.add(root.val);
-            Inorder(root.right, list);
+    public void inorder(TreeNode root, List<Integer> leafNodes) {
+        if(root == null) return;
+
+        inorder(root.left, leafNodes);
+        if(root.left == null && root.right == null) {
+            leafNodes.add(root.val);
+            return;
         }
+
+        inorder(root.right, leafNodes);
+
     }
 
     public boolean leafSimilar(TreeNode root1, TreeNode root2) {
-        List<Integer> list1 = new ArrayList<>();
-        List<Integer> list2 = new ArrayList<>();
-        Inorder(root1, list1);
-        Inorder(root2, list2);
-        
-        return list1.equals(list2);
+        List<Integer> leafNode_root1 = new ArrayList<>();
+        List<Integer> leafNode_root2 = new ArrayList<>();
+
+        inorder(root1, leafNode_root1);
+        inorder(root2, leafNode_root2);
+
+        return leafNode_root1.equals(leafNode_root2);
     }
 }
