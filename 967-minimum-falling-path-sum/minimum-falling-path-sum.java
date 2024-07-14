@@ -1,51 +1,31 @@
 class Solution {
-    // static int [][] dp;
-    // public int minFallingPathSum(int[][] mat) {
-    //     int row = mat.length;
-    //     dp = new int[row][row];
-    //     for(int d[] : dp) Arrays.fill(d, -1);
-    //     return MinPath(mat, row, 0, 0);
-    // }
-    // public static int MinPath(int[][] mat, int n, int row, int col) {
-    //     if(col < 0 || col >= n )
-    //         return Integer.MAX_VALUE;
-    //     if(row == n-1)
-    //         return mat[row][col];
-        
-    //     if(dp[row][col] != -1)
-    //         return dp[row][col];
-    //     int dleft = mat[row][col] + MinPath(mat, n, row+1, col-1);
-    //     int d = mat[row][col] + MinPath(mat, n, row+1, col);
-    //     int dright = mat[row][col] + MinPath(mat, n, row+1, col+1);
-    //     d = Math.min(dleft, d);
-    //     d = Math.min(d, dright);
-    //     return dp[row][col] = d;
-    // }
-
     public int minFallingPathSum(int[][] mat) {
-        int row = mat.length;
-        List <Integer> list = new ArrayList<>();
-        for(int i=0; i<row; i++) {
-            list.add(mat[0][i]);
-        }
-        for(int i=1; i<row; i++) {
-            List <Integer> temp = new ArrayList<>();
-            int minValue = Math.min(list.get(0), list.get(1));
-            temp.add(minValue + mat[i][0]);
-            for(int j=1; j<row-1; j++) {
-                minValue = Math.min(list.get(j-1), list.get(j+1));
-                minValue = Math.min(list.get(j), minValue);
-                temp.add(minValue + mat[i][j]);
+        int n = mat.length;
+
+        int [] min_sum_dp = new int[n];
+
+        for(int i = 0; i<n; i++) min_sum_dp[i] = mat[0][i];
+
+        for(int i = 1; i<n; i++) {
+            int [] dp = new int[n];
+
+            dp[0] = Math.min(min_sum_dp[0], min_sum_dp[1]) + mat[i][0];
+            for(int j = 1; j<n-1; j++) {
+                int minVal = Integer.MAX_VALUE;
+                minVal = Math.min(min_sum_dp[j], min_sum_dp[j+1]);
+                minVal = Math.min(minVal, min_sum_dp[j-1]);
+                dp[j] = minVal + mat[i][j];
             }
-            minValue = Math.min(list.get(row-1), list.get(row-2));
-            temp.add(minValue + mat[i][row-1]);
-            list = temp;
+
+            dp[n-1] = Math.min(min_sum_dp[n-1], min_sum_dp[n-2]) + mat[i][n-1];
+            min_sum_dp = dp;
         }
-        int mini = Integer.MAX_VALUE;
-        for(int i=0; i<list.size(); i++) {
-            if(mini > list.get(i))
-                mini = list.get(i);
+
+        int min = Integer.MAX_VALUE;
+        for(int i : min_sum_dp) {
+            if(min > i) min = i;
         }
-        return mini;
+        return min;
+
     }
 }
