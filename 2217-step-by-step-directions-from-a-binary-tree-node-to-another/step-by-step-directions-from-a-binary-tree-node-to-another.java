@@ -48,7 +48,7 @@ class Solution {
         if(FindThePath(map.get(start), destination, path)) return true;
         path.deleteCharAt(path.length() - 1);
 
-        visited.remove(start.val);
+        // visited.remove(start.val);
         return false;
     }
 
