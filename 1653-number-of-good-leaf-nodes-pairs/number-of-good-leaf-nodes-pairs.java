@@ -15,25 +15,17 @@
  */
 class Solution {
 
-    // class Pair {
-    //     int x, y;
-    //     Pair(int x, int y) {
-    //         this.x = x;
-    //         this.y = y;
-    //     }
-    // }
-
-    public void traverseAndFindLeafNodes(List<TreeNode> leafNodes, TreeNode root) {
+    public void traverseAndFindLeafNodes(TreeNode root, int distance) {
         if(root == null) return;
 
         // add all the leaf nodes in the leafNodes list...
         if(root.left == null && root.right == null) {
-            leafNodes.add(root);
+            traverseFromLeafNode(root, distance, 0,  new HashSet<TreeNode>());
             return;
         }
 
-        traverseAndFindLeafNodes(leafNodes, root.left);
-        traverseAndFindLeafNodes(leafNodes, root.right);
+        traverseAndFindLeafNodes(root.left,  distance);
+        traverseAndFindLeafNodes(root.right, distance);
     }
 
     public void addParents(TreeNode root, TreeNode parent) {
@@ -70,17 +62,19 @@ class Solution {
     Map<TreeNode, TreeNode> parentMap;
 
     public int countPairs(TreeNode root, int distance) {
-        List<TreeNode> leafNodes = new ArrayList<>();
 
         parentMap = new HashMap<>();
 
+        // storing the parents.....
         addParents(root, null);
-        traverseAndFindLeafNodes(leafNodes, root);
 
-        for(TreeNode leaf : leafNodes) {
-            traverseFromLeafNode(leaf, distance, 0,  new HashSet<TreeNode>());
-        }
-        
+        // storing the leaf nodes.....
+        traverseAndFindLeafNodes(root, distance);
+
+        // for(TreeNode leaf : leafNodes) {
+        //     // traverse from each leaf node and get pairs...
+        //     traverseFromLeafNode(leaf, distance, 0,  new HashSet<TreeNode>());
+        // }
         
         return pairsOfLeafNodes/2;
 
