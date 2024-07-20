@@ -2,13 +2,15 @@ class Solution {
     public int[][] restoreMatrix(int[] rowSum, int[] colSum) {
         int r = rowSum.length, c = colSum.length;
         int [][] mat = new int[r][c];
+        int i = 0, j = 0;
+        while(i<r && j<c) {
+            mat[i][j] = Math.min(rowSum[i], colSum[j]);
+            rowSum[i] -= mat[i][j];
+            colSum[j] -= mat[i][j];
 
-        for(int i = 0; i<r; i++) {
-            for(int j = 0; j<c; j++) {
-                mat[i][j] = Math.min(rowSum[i], colSum[j]);
-                rowSum[i] -= mat[i][j];
-                colSum[j] -= mat[i][j];
-            }
+            if(rowSum[i] == 0) i++;
+            else j++;
+
         }
         return mat;
     }
