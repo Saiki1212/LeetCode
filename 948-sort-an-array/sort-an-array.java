@@ -1,9 +1,7 @@
 class Solution {
     
     public int[] sortArray(int[] nums) {
-        int n = nums.length;
-        if(n == 1) return nums;
-        mergeSort(nums, 0, n-1);
+        mergeSort(nums, 0, nums.length-1);
         return nums;
     }
 
