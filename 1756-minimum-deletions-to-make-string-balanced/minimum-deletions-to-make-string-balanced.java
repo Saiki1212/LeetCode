@@ -3,18 +3,16 @@ class Solution {
         int n = s.length();
         int noOfDeletions = 0;
 
-        int noOfBs = 0, noOfAs = 0;
-        int maxi = 0;
+        Stack<Character> stack = new Stack<>();
 
         for(int i = 0; i<n; i++) {
             char c = s.charAt(i);
-            if(c == 'b') noOfBs++;
-            else if(noOfBs > 0) {
-                noOfAs++;
-                maxi = Math.max(maxi, noOfAs);
-                noOfBs--;
+            if(stack.isEmpty() || c == 'b') stack.push(c);
+            else if(stack.peek() == 'b'){
+                stack.pop();
+                noOfDeletions++;
             }
         }
-        return maxi;
+        return noOfDeletions;
     }
 }
